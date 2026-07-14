@@ -14,3 +14,20 @@ G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\Wind
 G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\Windows Forms core chat\Windows Forms core chat\obj\Debug\net10.0-windows7.0\Windows Forms core chat.pdb
 G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\Windows Forms core chat\Windows Forms core chat\obj\Debug\net10.0-windows7.0\Windows Forms core chat.genruntimeconfig.cache
 G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\Windows Forms core chat\Windows Forms core chat\obj\Debug\net10.0-windows7.0\ref\Windows Forms core chat.dll
+G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\bin\Debug\net10.0-windows7.0\Windows Forms core chat.exe
+G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\bin\Debug\net10.0-windows7.0\Windows Forms core chat.deps.json
+G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\bin\Debug\net10.0-windows7.0\Windows Forms core chat.runtimeconfig.json
+G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\bin\Debug\net10.0-windows7.0\Windows Forms core chat.dll
+G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\bin\Debug\net10.0-windows7.0\Windows Forms core chat.pdb
+G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\Windows_Forms_Chat.Form1.resources
+G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\Windows Forms core chat.csproj.GenerateResource.cache
+G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\Windows Forms core chat.GeneratedMSBuildEditorConfig.editorconfig
+G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\Windows Forms core chat.AssemblyInfoInputs.cache
+G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\Windows Forms core chat.AssemblyInfo.cs
+G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\Windows Forms core chat.csproj.CoreCompileInputs.cache
+G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\Windows Forms core chat.sourcelink.json
+G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\Windows Forms core chat.dll
+G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\refint\Windows Forms core chat.dll
+G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\Windows Forms core chat.pdb
+G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\Windows Forms core chat.genruntimeconfig.cache
+G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\ref\Windows Forms core chat.dll

@@ -66,7 +66,7 @@ namespace Windows_Forms_Chat
             {
                 try
                 {
-                    int port = int.Parse(MyPortTextBox.Text);
+                    int port = int.Parse(MyPortTextBox.Text); 
                     int serverPort = int.Parse(serverPortTextBox.Text);
                     client = TCPChatClient.CreateInstance(port, serverPort, ServerIPTextBox.Text, ChatTextBox);
 
@@ -74,7 +74,6 @@ namespace Windows_Forms_Chat
                         throw new Exception("Incorrect port value!");//thrown exceptions should exit the try and land in next catch
 
                     client.ConnectToServer();
-
                 }
                 catch (Exception ex)
                 {
@@ -82,7 +81,9 @@ namespace Windows_Forms_Chat
                     ChatTextBox.Text += "Error: " + ex;
                     ChatTextBox.AppendText(Environment.NewLine);
                 }
-            
+
+                string username = UsernameTextbox.Text; // Fetch the text from the textbox when the join button is clicked.
+                client.SendString("!username " + username);
             }
         }
 

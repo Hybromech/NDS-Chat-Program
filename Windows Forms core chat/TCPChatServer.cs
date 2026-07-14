@@ -104,26 +104,46 @@ namespace Windows_Forms_Chat
             string text = Encoding.ASCII.GetString(recBuf);
 
            AddToChat( text );
+            // separate into functions later.
 
-            if (text.ToLower() == "!commands") // Client requested time
+            string[] param = text.ToLower().Split(' '); // Split the text by space.
+
+            switch (param[0])
             {
-                byte[] data = Encoding.ASCII.GetBytes("Commands are !commands !about !who !whisper !exit");
-                currentClientSocket.socket.Send(data);
-                AddToChat("Commands sent to client");
-            }
-            else if (text.ToLower() == "!exit") // Client wants to exit gracefully
-            {
-                // Always Shutdown before closing
-                currentClientSocket.socket.Shutdown(SocketShutdown.Both);
-                currentClientSocket.socket.Close();
-                clientSockets.Remove(currentClientSocket);
-                AddToChat("Client disconnected");
-                return;
-            }
-            else
-            {
-                //normal message broadcast out to all clients
-                SendToAll(text, currentClientSocket);
+                case "!username":
+                    if (param.Length > 1) // Fail safe against reading beyond the array.
+                    {
+                        string username = param[1];
+                        currentClientSocket.username = username;
+                        byte[] usernameSet = Encoding.ASCII.GetBytes("Username set to: " + username);
+                        currentClientSocket.socket.Send(usernameSet);
+                    }
+                    else
+                    {
+                        byte[] usernameError = Encoding.ASCII.GetBytes("Please provide a username.");
+                        currentClientSocket.socket.Send(usernameError);
+                    }
+                    break;
+                case "!commands":
+                    byte[] data = Encoding.ASCII.GetBytes("Commands are !commands !about !who !whisper !exit");
+                    currentClientSocket.socket.Send(data);
+                    AddToChat("Commands sent to client");
+                    break;
+                case "!exit":
+                    // Always Shutdown before closing
+                    currentClientSocket.socket.Shutdown(SocketShutdown.Both);
+                    currentClientSocket.socket.Close();
+                    clientSockets.Remove(currentClientSocket);
+                    AddToChat("Client disconnected");
+                    return;
+                case "!who":
+                    break;
+                case "!about":
+                    break;
+                default:
+                    //normal message broadcast out to all clients
+                    SendToAll(currentClientSocket.username + ": " + text, currentClientSocket);
+                    break;
             }
             //we just received a message from this socket, better keep an ear out with another thread for the next one
             currentClientSocket.socket.BeginReceive(currentClientSocket.buffer, 0, ClientSocket.BUFFER_SIZE, SocketFlags.None, ReceiveCallback, currentClientSocket);

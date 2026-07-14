@@ -51,6 +51,8 @@
             button8 = new System.Windows.Forms.Button();
             button9 = new System.Windows.Forms.Button();
             button10 = new System.Windows.Forms.Button();
+            UsernameTextbox = new System.Windows.Forms.TextBox();
+            label6 = new System.Windows.Forms.Label();
             SuspendLayout();
             // 
             // label1
@@ -277,11 +279,29 @@
             button10.Text = "button10";
             button10.UseVisualStyleBackColor = true;
             // 
+            // UsernameTextbox
+            // 
+            UsernameTextbox.Location = new System.Drawing.Point(476, 96);
+            UsernameTextbox.Name = "UsernameTextbox";
+            UsernameTextbox.Size = new System.Drawing.Size(178, 29);
+            UsernameTextbox.TabIndex = 15;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new System.Drawing.Point(476, 72);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(81, 21);
+            label6.TabIndex = 16;
+            label6.Text = "Username";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1297, 502);
+            Controls.Add(label6);
+            Controls.Add(UsernameTextbox);
             Controls.Add(button10);
             Controls.Add(button9);
             Controls.Add(button8);
@@ -338,6 +358,8 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.TextBox UsernameTextbox;
+        private System.Windows.Forms.Label label6;
     }
 }
 

@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\Windows Forms core chat\\Windows Forms core chat\\Windows Forms core chat.csproj",
+      "projectUniqueName": "G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\Windows Forms core chat.csproj",
       "projectName": "Windows Forms core chat",
-      "projectPath": "G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\Windows Forms core chat\\Windows Forms core chat\\Windows Forms core chat.csproj",
+      "projectPath": "G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\Windows Forms core chat.csproj",
       "packagesPath": "C:\\Users\\andrew\\.nuget\\packages\\",
-      "outputPath": "G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\Windows Forms core chat\\Windows Forms core chat\\obj\\",
+      "outputPath": "G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\andrew\\AppData\\Roaming\\NuGet\\NuGet.Config",
