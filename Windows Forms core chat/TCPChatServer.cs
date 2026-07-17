@@ -5,6 +5,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Linq;
 
 //https://github.com/AbleOpus/NetworkingSamples/blob/master/MultiServer/Program.cs
 namespace Windows_Forms_Chat
@@ -140,6 +142,23 @@ namespace Windows_Forms_Chat
                     break;
                 case "!about":
                     break;
+                case "!whisper": //# Send messages to specific users.
+                    if (param.Length >= 2)
+                    {       // targetUser, message1, message2, message3
+                        string targetUser = param[1];
+                        int takeFromRight = param.Length - 2;
+                        var rightElements = param.Skip(param.Length - takeFromRight);
+                        string result = string.Join(" ", rightElements);
+                        string message = "[Whisper from " + currentClientSocket.username + ']' + " " + result;
+                        
+                        SendToTarget(message, targetUser, currentClientSocket);
+
+                    }
+                    else
+                    {
+                        // Reply with error.
+                    }
+                    break;
                 default:
                     //normal message broadcast out to all clients
                     SendToAll(currentClientSocket.username + ": " + text, currentClientSocket);
@@ -161,6 +180,21 @@ namespace Windows_Forms_Chat
             }
         }
 
+        public void SendToTarget(string str, string target, ClientSocket from)
+        {
+            foreach (ClientSocket c in clientSockets)
+            {
+                if (from == null || !from.socket.Equals(c))
+                {
+                    if (c.username.Equals(target))
+                    {
+                        byte[] data = Encoding.ASCII.GetBytes(str);
+                        c.socket.Send(data);
+                        break;
+                    }
+                }
+            }
+        }
         
     }
 }
