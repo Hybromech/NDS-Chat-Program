@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Media;
 
 //https://www.youtube.com/watch?v=xgLRe7QV6QI&ab_channel=HazardEditHazardEdit
 namespace Windows_Forms_Chat
@@ -24,9 +24,57 @@ namespace Windows_Forms_Chat
         public Form1()
         {
             InitializeComponent();
-
+            //# Enable the form to catch key events before controls do
+            this.KeyPreview = true;
+            // Explicitly link the KeyDown event to the method
+            this.KeyDown += new KeyEventHandler(Form1_KeyDown);
         }
-        
+
+        //# Setup Key press enter to send chat
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Bind the key 'enter' to send button
+            if (e.KeyCode == Keys.Enter)
+            {
+                SendButton.PerformClick();
+                e.Handled = true; //# Prevents the key from triggering other OS/control events
+
+                // Play custom sound
+                //SystemSounds.Asterisk.Play();
+
+                // THIS stops the default beep in KeyDown
+                e.SuppressKeyPress = true;
+                PlayCustomSound();
+            }
+        }
+
+        //# Silence the default ding sound
+
+       
+
+        private void PlayCustomSound()
+        {
+            try
+            {
+                // Option A: Play a system sound (like Asterisk or Exclamation)
+                //SystemSounds.Asterisk.Play();
+
+                 //Option B: Play a custom .wav file from your computer
+                 using (SoundPlayer player = new SoundPlayer("G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\soundAssets\\message.wav"))
+                 {
+                     player.Play();
+                 }
+            }
+            catch (Exception ex)
+            {
+                // Handle file missing or audio errors silently
+                Console.WriteLine("missing or audio errors");
+            }
+        }
+
+
+
         public bool CanHostOrJoin()
         {
             if (server == null && client == null)
