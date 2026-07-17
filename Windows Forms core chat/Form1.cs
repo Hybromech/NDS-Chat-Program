@@ -31,36 +31,24 @@ namespace Windows_Forms_Chat
         }
 
         //# Setup Key press enter to send chat
-
+        //# Silence the default ding sound
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             // Bind the key 'enter' to send button
             if (e.KeyCode == Keys.Enter)
             {
                 SendButton.PerformClick();
-                e.Handled = true; //# Prevents the key from triggering other OS/control events
-
-                // Play custom sound
-                //SystemSounds.Asterisk.Play();
-
                 // THIS stops the default beep in KeyDown
                 e.SuppressKeyPress = true;
-                PlayCustomSound();
+                e.Handled = true; //# Prevents the key from triggering other OS/control events
             }
         }
-
-        //# Silence the default ding sound
-
-       
-
         private void PlayCustomSound()
         {
             try
             {
-                // Option A: Play a system sound (like Asterisk or Exclamation)
-                //SystemSounds.Asterisk.Play();
-
-                 //Option B: Play a custom .wav file from your computer
+                 // Play a custom .wav file
+                 // make the path relative!.
                  using (SoundPlayer player = new SoundPlayer("G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\soundAssets\\message.wav"))
                  {
                      player.Play();
@@ -72,9 +60,6 @@ namespace Windows_Forms_Chat
                 Console.WriteLine("missing or audio errors");
             }
         }
-
-
-
         public bool CanHostOrJoin()
         {
             if (server == null && client == null)
@@ -96,8 +81,7 @@ namespace Windows_Forms_Chat
                         throw new Exception("Incorrect port value!");//thrown exceptions should exit the try and land in next catch
 
                     server.SetupServer();
-
-
+                    //this.Text = "Server " + server.port.ToString();
                 }
                 catch (Exception ex)
                 {
@@ -141,6 +125,10 @@ namespace Windows_Forms_Chat
                 client.SendString(TypeTextBox.Text);
             else if (server != null)
                 server.SendToAll(TypeTextBox.Text, null);
+
+            PlayCustomSound();  // Play custom sound
+
+            TypeTextBox.Clear();
         }
 
         private void Form1_Load(object sender, EventArgs e)
