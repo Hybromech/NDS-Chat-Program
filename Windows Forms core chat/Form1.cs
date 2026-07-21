@@ -94,8 +94,16 @@ namespace Windows_Forms_Chat
 
         private void JoinButton_Click(object sender, EventArgs e)
         {
-            if (!CanHostOrJoin()) return;
-
+            if (client != null)
+            { 
+                if (client.clientSocket.connectionLost == true)
+                    client = null;
+            }
+            if (CanHostOrJoin() == false)
+            {
+                return;
+            }
+           
             // 1. Validate username FIRST before spinning up network code
             if (string.IsNullOrEmpty(UsernameTextbox.Text))
             {

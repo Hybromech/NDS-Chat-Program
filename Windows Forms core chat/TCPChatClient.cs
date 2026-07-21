@@ -60,7 +60,6 @@ namespace Windows_Forms_Chat
             }
 
             //Console.Clear();
-            AddToChat("Connected");
             //keep open thread for receiving data
             clientSocket.socket.BeginReceive(clientSocket.buffer, 0, ClientSocket.BUFFER_SIZE, SocketFlags.None, ReceiveCallback, clientSocket);
         }
@@ -95,6 +94,14 @@ namespace Windows_Forms_Chat
             //convert to string so we can work with it
             string text = Encoding.ASCII.GetString(recBuf);
             Console.WriteLine("Received Text: " + text);
+
+            if (text == "That username is taken.")
+            {
+                AddToChat("\"You have been rejected that username is taken!");
+                clientSocket.connectionLost = true;
+                socket.Close();
+                return;
+            }
 
             //text is from server but could have been broadcast from the other clients
             AddToChat( text );

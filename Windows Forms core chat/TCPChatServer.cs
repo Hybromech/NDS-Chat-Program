@@ -121,12 +121,37 @@ namespace Windows_Forms_Chat
                 case "!username":
                     if (param.Length > 1) // Fail safe against reading beyond the array.
                     {
+                        
                         string username = param[1];
+
+                        // Check if username is available.
+
+                        bool username_free = true;
+                        foreach (var u in clientSockets)
+                        {
+                            if (u.username == username)
+                                username_free = false;
+                            break;
+                        }
+
                         currentClientSocket.username = username;
-                        byte[] usernameSet = Encoding.ASCII.GetBytes("Username set to: " + username);
-                        currentClientSocket.socket.Send(usernameSet);
+                        
+                        if (username_free)
+                        {        
+                            byte[] usernameSet = Encoding.ASCII.GetBytes("Username set to: " + username);
+                            currentClientSocket.socket.Send(usernameSet);                         
+                            SendToTarget("Connected", username, currentClientSocket);
+                        }
+                        else
+                        {
+                            // Send error and disconnect the client.
+                            byte[] usernameError = Encoding.ASCII.GetBytes("That username is taken.");                    
+                            currentClientSocket.socket.Send(usernameError);
+                            //currentClientSocket.socket.DisconnectAsync(true); // creates stack overflow for some reason!
+                        }
+                        
                     }
-                    else
+                    else // No username provided
                     {
                         byte[] usernameError = Encoding.ASCII.GetBytes("Please provide a username.");
                         currentClientSocket.socket.Send(usernameError);
