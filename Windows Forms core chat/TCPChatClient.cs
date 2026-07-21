@@ -72,7 +72,7 @@ namespace Windows_Forms_Chat
         }
 
 
-        public void ReceiveCallback(IAsyncResult AR)
+        public void ReceiveCallback(IAsyncResult AR) // recieve message from the server
         {
             ClientSocket currentClientSocket = (ClientSocket)AR.AsyncState;
 

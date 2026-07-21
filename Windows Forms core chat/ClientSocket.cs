@@ -9,6 +9,7 @@ namespace Windows_Forms_Chat
     {
         //add other attributes to this, e.g username, what state the client is in etc
         public string username; // stores this clients name.
+        public bool moderator;
         public Socket socket;
         public const int BUFFER_SIZE = 2048;
         public byte[] buffer = new byte[BUFFER_SIZE];

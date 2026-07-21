@@ -44,8 +44,6 @@ namespace Windows_Forms_Chat
             chatTextBox.Text += "Server setup complete\n";
         }
 
-
-
         public void CloseAllSockets()
         {
             foreach (ClientSocket clientSocket in clientSockets)
@@ -82,7 +80,7 @@ namespace Windows_Forms_Chat
             serverSocket.BeginAccept(AcceptCallback, null);
         }
 
-        public void ReceiveCallback(IAsyncResult AR)
+        public void ReceiveCallback(IAsyncResult AR) // recieve message from the client
         {
             ClientSocket currentClientSocket = (ClientSocket)AR.AsyncState;
             
@@ -112,6 +110,14 @@ namespace Windows_Forms_Chat
 
             switch (param[0])
             {
+                case "!mod":
+                    // Only the server can elevate to moderator!
+                    SendToTarget("Only the server can elevate to moderator!", currentClientSocket.username, currentClientSocket); // Infrom illegal action to client.
+
+                    break;
+                case "!kick":
+                    //
+                    break;
                 case "!username":
                     if (param.Length > 1) // Fail safe against reading beyond the array.
                     {
@@ -168,6 +174,59 @@ namespace Windows_Forms_Chat
             currentClientSocket.socket.BeginReceive(currentClientSocket.buffer, 0, ClientSocket.BUFFER_SIZE, SocketFlags.None, ReceiveCallback, currentClientSocket);
         }
 
+        public void LocalMessage(string str)
+        {
+            string[] param = str.ToLower().Split(' ');
+            switch (param[0])
+            {
+                case "!mod":
+                    AddToChat("Server designates a moderator.");
+                    if (param.Length > 1) // there must be two words, command and username.
+                    {
+                        string target = param[1];
+                        // check if target exists in connected clients
+                        ClientSocket targetSocket = GetUsername(target);
+                        if (targetSocket == null)
+                        {
+                            // couldn't find username
+                            AddToChat("Target username does not exist");
+                        }
+                        else
+                        {
+                            // promote/demote
+                            targetSocket.moderator = !targetSocket.moderator; // Toggle targetsocket.
+                            if (targetSocket.moderator == true)
+                            {
+                                // promoted to moderator
+                                SendToAll(target + " promoted to moderator!", null);
+                            }
+                            else
+                            {
+                                // demoted from moderator
+                                SendToAll(target + " no longer a moderator!", null);
+                            }
+                        }
+                    }
+                    else 
+                    {
+                        AddToChat("Please specify a username");
+                    }
+                        break;
+                        default:
+                        SendToAll("SERVER: " + str, null);
+                        break;
+            }
+        }
+
+        public ClientSocket GetUsername(string targetUsername) // If client cannot be found return null
+        {
+            foreach (ClientSocket c in clientSockets)
+            {
+                if (c.username.Equals(targetUsername))
+                    return c;
+            }
+            return null;
+        }
         public void SendToAll(string str, ClientSocket from)
         {
             foreach(ClientSocket c in clientSockets)

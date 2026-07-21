@@ -143,7 +143,7 @@ namespace Windows_Forms_Chat
             if (client != null)
                 client.SendString(TypeTextBox.Text);
             else if (server != null)
-                server.SendToAll(TypeTextBox.Text, null);
+                server.LocalMessage(TypeTextBox.Text);
 
             PlayCustomSound();  // Play custom sound
 
