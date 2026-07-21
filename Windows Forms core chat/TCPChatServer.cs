@@ -105,7 +105,7 @@ namespace Windows_Forms_Chat
             Array.Copy(currentClientSocket.buffer, recBuf, received);
             string text = Encoding.ASCII.GetString(recBuf);
 
-           AddToChat( text );
+           AddToChat(currentClientSocket.username + ": " + text); // Add message to server.
             // separate into functions later.
 
             string[] param = text.ToLower().Split(' '); // Split the text by space.

@@ -81,7 +81,7 @@ namespace Windows_Forms_Chat
                         throw new Exception("Incorrect port value!");//thrown exceptions should exit the try and land in next catch
 
                     server.SetupServer();
-                    //this.Text = "Server " + server.port.ToString();
+                    this.Text = "Server " + server.port.ToString(); // Modify the form title to Server + port number.
                 }
                 catch (Exception ex)
                 {
@@ -94,28 +94,47 @@ namespace Windows_Forms_Chat
 
         private void JoinButton_Click(object sender, EventArgs e)
         {
-            if (CanHostOrJoin())
+            if (!CanHostOrJoin()) return;
+
+            // 1. Validate username FIRST before spinning up network code
+            if (string.IsNullOrEmpty(UsernameTextbox.Text))
             {
-                try
-                {
-                    int port = int.Parse(MyPortTextBox.Text); 
-                    int serverPort = int.Parse(serverPortTextBox.Text);
-                    client = TCPChatClient.CreateInstance(port, serverPort, ServerIPTextBox.Text, ChatTextBox);
+                // Guard against client being null if this is the first run
+                if (client != null)
+                    client.AddToChat("Error can't join, Username not specified!");
+                else
+                    ChatTextBox.AppendText("Error can't join, Username not specified!" + Environment.NewLine);
 
-                    if (client == null)
-                        throw new Exception("Incorrect port value!");//thrown exceptions should exit the try and land in next catch
+                return;
+            }
 
-                    client.ConnectToServer();
-                }
-                catch (Exception ex)
-                {
-                    client = null;
-                    ChatTextBox.Text += "Error: " + ex;
-                    ChatTextBox.AppendText(Environment.NewLine);
-                }
+            try
+            {
+                // 2. Disconnect/Reset any existing singleton instance so a clean one can form
+                // (You may need to add a Reset or Dispose method to your TCPChatClient class)
+                // TCPChatClient.ResetInstance(); 
 
-                string username = UsernameTextbox.Text; // Fetch the text from the textbox when the join button is clicked.
+                int port = int.Parse(MyPortTextBox.Text);
+                int serverPort = int.Parse(serverPortTextBox.Text);
+
+                client = TCPChatClient.CreateInstance(port, serverPort, ServerIPTextBox.Text, ChatTextBox);
+
+                if (client == null)
+                    throw new Exception("Incorrect port value or client instance failed!");
+
+                // 3. Connect and update UI
+                client.ConnectToServer();
+                this.Text = "Client " + UsernameTextbox.Text;
+
+                // 4. Move this safely INSIDE the try block so it only runs on a valid connection
+                string username = UsernameTextbox.Text;
                 client.SendString("!username " + username);
+            }
+            catch (Exception ex)
+            {
+                client = null;
+                // Best practice: Use AppendText so it automatically scrolls to the bottom
+                ChatTextBox.AppendText("Error: " + ex.Message + Environment.NewLine);
             }
         }
 
