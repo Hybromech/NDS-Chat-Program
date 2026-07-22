@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Net;
-using System.Net.Sockets;
-using System.Threading;
-using System.Windows.Forms;
 using System.Drawing;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 //https://github.com/AbleOpus/NetworkingSamples/blob/master/MultiServer/Program.cs
 namespace Windows_Forms_Chat
@@ -110,6 +111,15 @@ namespace Windows_Forms_Chat
 
             switch (param[0])
             {
+                case "!user":
+                    if (param.Length > 1)
+                    {
+                        // change the username
+                        SendToAll(currentClientSocket.username + " has changed their username to " + param[1],null);
+                        currentClientSocket.username = param[1]; // set user specifed username.
+                    }
+                    break;
+                       
                 case "!mod":
                     // Only the server can elevate to moderator!
                     SendToTarget("Only the server can elevate to moderator!", currentClientSocket.username, currentClientSocket); // Infrom illegal action to client.
@@ -147,7 +157,7 @@ namespace Windows_Forms_Chat
                             // Send error and disconnect the client.
                             byte[] usernameError = Encoding.ASCII.GetBytes("That username is taken.");                    
                             currentClientSocket.socket.Send(usernameError);
-                            //currentClientSocket.socket.DisconnectAsync(true); // creates stack overflow for some reason!
+                            currentClientSocket.socket.DisconnectAsync(true); // creates stack overflow for some reason!
                         }
                         
                     }

@@ -99,6 +99,7 @@ namespace Windows_Forms_Chat
             {
                 AddToChat("\"You have been rejected that username is taken!");
                 clientSocket.connectionLost = true;
+                socket.DisconnectAsync(true);
                 socket.Close();
                 return;
             }
