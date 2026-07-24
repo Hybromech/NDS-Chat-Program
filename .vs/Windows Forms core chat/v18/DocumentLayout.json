@@ -56,7 +56,7 @@
               "RelativeDocumentMoniker": "Windows Forms core chat\\TCPChatServer.cs",
               "ToolTip": "G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\TCPChatServer.cs",
               "RelativeToolTip": "Windows Forms core chat\\TCPChatServer.cs",
-              "ViewState": "AgIAAGcAAAAAAAAAAAAcwHYAAABfAAAAAAAAAA==",
+              "ViewState": "AgIAAMcAAAAAAAAAAAAcwM4AAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-07-10T08:34:59.814Z",
               "EditorCaption": ""
@@ -71,8 +71,7 @@
               "RelativeToolTip": "Windows Forms core chat\\TCPChatClient.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAGMAAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-06T01:37:27.31Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-06T01:37:27.31Z"
             },
             {
               "$type": "Document",
@@ -97,8 +96,7 @@
               "RelativeToolTip": "Windows Forms core chat\\ClientSocket.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAoAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-29T02:57:53.177Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-29T02:57:53.177Z"
             },
             {
               "$type": "Document",

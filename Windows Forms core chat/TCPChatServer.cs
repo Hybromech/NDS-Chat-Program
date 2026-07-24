@@ -180,8 +180,17 @@ namespace Windows_Forms_Chat
                     AddToChat("Client disconnected");
                     return;
                 case "!who":
+
+                    // send back messages containing the names of the connected users to the client
+                    SendToTarget("Connected Users:", currentClientSocket.username, null);
+                    foreach (var socket in clientSockets)
+                    {
+                        SendToTarget(socket.username, currentClientSocket.username, null);
+                    }               
                     break;
                 case "!about":
+                    // send information back to the client about its creator, purpose and year of development
+                    SendToTarget("Modified by Andrew Jonas, the purpose of this is to learn networking through fixing a TCP chat program. Created 24/07/2026.", currentClientSocket.username, null);
                     break;
                 case "!whisper": //# Send messages to specific users.
                     if (param.Length >= 2)
@@ -199,6 +208,11 @@ namespace Windows_Forms_Chat
                     {
                         // Reply with error.
                     }
+                    break;
+
+                case "!":
+                    // Clear the current chat history
+                    
                     break;
                 default:
                     //normal message broadcast out to all clients
