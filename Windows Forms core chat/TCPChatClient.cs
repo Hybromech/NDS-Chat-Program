@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing;
 
 //reference: https://github.com/AbleOpus/NetworkingSamples/blob/master/MultiClient/Program.cs
 namespace Windows_Forms_Chat
@@ -17,9 +18,9 @@ namespace Windows_Forms_Chat
 
         public int serverPort;
         public string serverIP;
+        public Color textColor = Color.Black;
 
-
-        public static TCPChatClient CreateInstance(int port, int serverPort, string serverIP, TextBox chatTextBox)
+        public static TCPChatClient CreateInstance(int port, int serverPort, string serverIP, RichTextBox chatTextBox)
         {
             TCPChatClient tcp = null;
             //if port values are valid and ip worth attempting to join
@@ -32,7 +33,7 @@ namespace Windows_Forms_Chat
                 tcp.port = port;
                 tcp.serverPort = serverPort;
                 tcp.serverIP = serverIP;
-                tcp.chatTextBox = chatTextBox;
+                tcp.ChatTextBox = chatTextBox;
                 tcp.clientSocket.socket = tcp.socket;
 
             }
@@ -55,7 +56,7 @@ namespace Windows_Forms_Chat
                 }
                 catch (SocketException)
                 {
-                    chatTextBox.Text = "";
+                    ChatTextBox.Text = "";
                 }
             }
 
@@ -95,6 +96,7 @@ namespace Windows_Forms_Chat
             string text = Encoding.ASCII.GetString(recBuf);
             Console.WriteLine("Received Text: " + text);
 
+            // reject duplicate username
             if (text == "That username is taken.")
             {
                 AddToChat("\"You have been rejected that username is taken!");
@@ -103,10 +105,15 @@ namespace Windows_Forms_Chat
                 socket.Close();
                 return;
             }
-
+            // check to see if the client is trying to change text color.
+            if (text.Contains("color"))
+            {
+                var targetColor = text.Replace("!color", ""); // remove color substring from the text.
+                textColor = Color.FromName(targetColor); // set this clients color.
+            }
             //text is from server but could have been broadcast from the other clients
-            AddToChat( text );
-            
+            // add text with users color
+            AddToChat( text, textColor );
             //we just received a message from this socket, better keep an ear out with another thread for the next one
             currentClientSocket.socket.BeginReceive(currentClientSocket.buffer, 0, ClientSocket.BUFFER_SIZE, SocketFlags.None, ReceiveCallback, currentClientSocket);
         }

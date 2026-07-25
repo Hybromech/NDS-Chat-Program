@@ -19,7 +19,7 @@ namespace Windows_Forms_Chat
         //connected clients
         public List<ClientSocket> clientSockets = new List<ClientSocket>();
 
-        public static TCPChatServer createInstance(int port, TextBox chatTextBox)
+        public static TCPChatServer createInstance(int port, RichTextBox chatTextBox)
         {
             TCPChatServer tcp = null;
             //setup if port within range and valid chat box given
@@ -27,7 +27,7 @@ namespace Windows_Forms_Chat
             {
                 tcp = new TCPChatServer();
                 tcp.port = port;
-                tcp.chatTextBox = chatTextBox;
+                tcp.ChatTextBox = chatTextBox;
 
             }
 
@@ -37,12 +37,12 @@ namespace Windows_Forms_Chat
 
         public void SetupServer()
         {
-            chatTextBox.Text += "Setting up server...\n";
+            ChatTextBox.Text += "Setting up server...\n";
             serverSocket.Bind(new IPEndPoint(IPAddress.Any, port));
             serverSocket.Listen(0);
             //kick off thread to read connecting clients, when one connects, it'll call out AcceptCallback function
             serverSocket.BeginAccept(AcceptCallback, this);
-            chatTextBox.Text += "Server setup complete\n";
+            ChatTextBox.Text += "Server setup complete\n";
         }
 
         public void CloseAllSockets()
@@ -129,6 +129,7 @@ namespace Windows_Forms_Chat
                     //
                     break;
                 case "!username":
+                    // chage the username
                     if (param.Length > 1) // Fail safe against reading beyond the array.
                     {
                         
@@ -168,7 +169,7 @@ namespace Windows_Forms_Chat
                     }
                     break;
                 case "!commands":
-                    byte[] data = Encoding.ASCII.GetBytes("Commands are !commands !about !who !whisper !exit");
+                    byte[] data = Encoding.ASCII.GetBytes("Commands are !user !mod !username !kick !exit !who !about !whisper !color");
                     currentClientSocket.socket.Send(data);
                     AddToChat("Commands sent to client");
                     break;
@@ -209,10 +210,10 @@ namespace Windows_Forms_Chat
                         // Reply with error.
                     }
                     break;
-
-                case "!":
-                    // Clear the current chat history
-                    
+                    // allow user to set their text color.
+                case "!color":
+                    // Send message command to the client with color setting information.
+                    SendToTarget(param[0] + param[1], currentClientSocket.username, currentClientSocket);
                     break;
                 default:
                     //normal message broadcast out to all clients
