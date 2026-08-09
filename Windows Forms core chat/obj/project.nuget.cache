@@ -1,18 +1,11 @@
 {
   "version": 2,
-<<<<<<< HEAD
-  "dgSpecHash": "+Lw9Q/urmfA=",
+  "dgSpecHash": "Q5idxCrMybE=",
   "success": true,
-  "projectFilePath": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\Windows Forms core chat\\Windows Forms core chat.csproj",
+  "projectFilePath": "G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\Windows Forms core chat.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Andy\\.nuget\\packages\\stub.system.data.sqlite.core.netstandard\\1.0.119\\stub.system.data.sqlite.core.netstandard.1.0.119.nupkg.sha512",
-    "C:\\Users\\Andy\\.nuget\\packages\\system.data.sqlite.core\\1.0.119\\system.data.sqlite.core.1.0.119.nupkg.sha512"
+    "C:\\Users\\andrew\\.nuget\\packages\\stub.system.data.sqlite.core.netstandard\\1.0.119\\stub.system.data.sqlite.core.netstandard.1.0.119.nupkg.sha512",
+    "C:\\Users\\andrew\\.nuget\\packages\\system.data.sqlite.core\\1.0.119\\system.data.sqlite.core.1.0.119.nupkg.sha512"
   ],
-=======
-  "dgSpecHash": "oASVU6WrN30=",
-  "success": true,
-  "projectFilePath": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\Windows Forms core chat.csproj",
-  "expectedPackageFiles": [],
->>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b
   "logs": []
 }

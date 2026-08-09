@@ -12,10 +12,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-<<<<<<< HEAD
+
 using Windows_Forms_CORE_CHAT_UGH;
-=======
->>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b
 
 //https://www.youtube.com/watch?v=xgLRe7QV6QI&ab_channel=HazardEditHazardEdit
 namespace Windows_Forms_Chat
@@ -111,11 +109,10 @@ namespace Windows_Forms_Chat
             }
 
             // Validate username FIRST before spinning up network code
-<<<<<<< HEAD
+
             if (string.IsNullOrEmpty(UsernameTextbox.Text) || string.IsNullOrEmpty(PasswordTextbox.Text))
-=======
+
             if (string.IsNullOrEmpty(UsernameTextbox.Text))
->>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b
             {
                 // Guard against client being null if this is the first run
                 if (client != null)
@@ -137,11 +134,7 @@ namespace Windows_Forms_Chat
 
                 if (client == null)
                     throw new Exception("Incorrect port value or client instance failed!");
-<<<<<<< HEAD
-
-=======
-                
->>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b
+      
                 // Connect and update UI
                 client.ConnectToServer();
                 this.Text = "Client " + UsernameTextbox.Text;
@@ -267,13 +260,9 @@ namespace Windows_Forms_Chat
         {
 
         }
-<<<<<<< HEAD
-
         private void label7_Click(object sender, EventArgs e)
         {
 
         }
-=======
->>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b
     }
 }

@@ -17,11 +17,7 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property.EntryPointFilePath = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Windows_Forms_CORE_CHAT_UGH
-<<<<<<< HEAD
-build_property.ProjectDir = F:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A3\NDS-Chat-Program\Windows Forms core chat\
-=======
-build_property.ProjectDir = F:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\
->>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b
+build_property.ProjectDir = G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.CsWinRTUseWindowsUIXamlProjections = false

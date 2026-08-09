@@ -1,50 +1,25 @@
 {
   "Version": 1,
-<<<<<<< HEAD
-  "WorkspaceRootPath": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\",
+  "WorkspaceRootPath": "G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|f:\\andrew adata\\bachelor of software engineering\\networking and database\\a3\\nds-chat-program\\windows forms core chat\\tcpchatserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|solutionrelative:windows forms core chat\\tcpchatserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|f:\\andrew adata\\bachelor of software engineering\\networking and database\\a3\\nds-chat-program\\windows forms core chat\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|g:\\andrew adata\\bachelor of software engineering\\networking and database\\a2\\github\\nds-chat-program\\windows forms core chat\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|solutionrelative:windows forms core chat\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|f:\\andrew adata\\bachelor of software engineering\\networking and database\\a3\\nds-chat-program\\windows forms core chat\\tcpchatclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|solutionrelative:windows forms core chat\\tcpchatclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|f:\\andrew adata\\bachelor of software engineering\\networking and database\\a3\\nds-chat-program\\windows forms core chat\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|g:\\andrew adata\\bachelor of software engineering\\networking and database\\a2\\github\\nds-chat-program\\windows forms core chat\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|solutionrelative:windows forms core chat\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|f:\\andrew adata\\bachelor of software engineering\\networking and database\\a3\\nds-chat-program\\windows forms core chat\\tictactoe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|solutionrelative:windows forms core chat\\tictactoe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|g:\\andrew adata\\bachelor of software engineering\\networking and database\\a2\\github\\nds-chat-program\\windows forms core chat\\form1.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|solutionrelative:windows forms core chat\\form1.resx||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|f:\\andrew adata\\bachelor of software engineering\\networking and database\\a3\\nds-chat-program\\windows forms core chat\\databaseaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|g:\\andrew adata\\bachelor of software engineering\\networking and database\\a2\\github\\nds-chat-program\\windows forms core chat\\databaseaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|solutionrelative:windows forms core chat\\databaseaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|f:\\andrew adata\\bachelor of software engineering\\networking and database\\a3\\nds-chat-program\\windows forms core chat\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|solutionrelative:windows forms core chat\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-=======
-  "WorkspaceRootPath": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|f:\\andrew adata\\bachelor of software engineering\\networking and database\\a2\\github\\nds-chat-program\\windows forms core chat\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|solutionrelative:windows forms core chat\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|f:\\andrew adata\\bachelor of software engineering\\networking and database\\a2\\github\\nds-chat-program\\windows forms core chat\\tcpchatclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|solutionrelative:windows forms core chat\\tcpchatclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|f:\\andrew adata\\bachelor of software engineering\\networking and database\\a2\\github\\nds-chat-program\\windows forms core chat\\tcpchatserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|solutionrelative:windows forms core chat\\tcpchatserver.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
->>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b
     }
   ],
   "DocumentGroupContainers": [
@@ -54,130 +29,68 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-<<<<<<< HEAD
-              "Title": "TCPChatServer.cs",
-              "DocumentMoniker": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\Windows Forms core chat\\TCPChatServer.cs",
-              "RelativeDocumentMoniker": "Windows Forms core chat\\TCPChatServer.cs",
-              "ToolTip": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\Windows Forms core chat\\TCPChatServer.cs",
-              "RelativeToolTip": "Windows Forms core chat\\TCPChatServer.cs",
-              "ViewState": "AgIAAIcBAAAAAAAAAAAuwJsBAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-07T04:05:00.142Z",
-=======
-              "Title": "Form1.cs",
-              "DocumentMoniker": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\Form1.cs",
-              "RelativeDocumentMoniker": "Windows Forms core chat\\Form1.cs",
-              "ToolTip": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\Form1.cs",
-              "RelativeToolTip": "Windows Forms core chat\\Form1.cs",
-              "ViewState": "AgIAAJMAAAAAAAAAAAA2wJIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-30T12:30:16.085Z",
->>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b
+              "DocumentIndex": 3,
+              "Title": "Form1.resx",
+              "DocumentMoniker": "G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\Form1.resx",
+              "RelativeDocumentMoniker": "Windows Forms core chat\\Form1.resx",
+              "ToolTip": "G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\Form1.resx",
+              "RelativeToolTip": "Windows Forms core chat\\Form1.resx",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAvwHYAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
+              "WhenOpened": "2026-08-09T08:55:27.471Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-<<<<<<< HEAD
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
+              "Title": "Microsoft.Common.CurrentVersion.targets",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ViewState": "AgIAACwXAAAAAAAAAAAcwD8XAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2026-08-09T08:45:25.142Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Form1.cs [Design]",
-              "DocumentMoniker": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\Windows Forms core chat\\Form1.cs",
+              "DocumentMoniker": "G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\Form1.cs",
               "RelativeDocumentMoniker": "Windows Forms core chat\\Form1.cs",
-              "ToolTip": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\Windows Forms core chat\\Form1.cs [Design]",
+              "ToolTip": "G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\Form1.cs [Design]",
               "RelativeToolTip": "Windows Forms core chat\\Form1.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-07T03:38:29.475Z",
+              "WhenOpened": "2026-08-09T08:45:03.247Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Form1.cs",
-              "DocumentMoniker": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\Windows Forms core chat\\Form1.cs",
+              "DocumentMoniker": "G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\Form1.cs",
               "RelativeDocumentMoniker": "Windows Forms core chat\\Form1.cs",
-              "ToolTip": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\Windows Forms core chat\\Form1.cs",
+              "ToolTip": "G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\Form1.cs",
               "RelativeToolTip": "Windows Forms core chat\\Form1.cs",
-              "ViewState": "AgIAAHoAAAAAAAAAAAASwIsAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAKoAAAAAAAAAAAAAwBQAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-07T01:11:36.2Z",
-=======
-              "DocumentIndex": 1,
-              "Title": "TCPChatClient.cs",
-              "DocumentMoniker": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\TCPChatClient.cs",
-              "RelativeDocumentMoniker": "Windows Forms core chat\\TCPChatClient.cs",
-              "ToolTip": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\TCPChatClient.cs",
-              "RelativeToolTip": "Windows Forms core chat\\TCPChatClient.cs",
-              "ViewState": "AgIAAHEAAAAAAAAAAAAIwJ4AAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-30T12:15:05.123Z",
->>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-<<<<<<< HEAD
-              "Title": "TCPChatClient.cs",
-              "DocumentMoniker": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\Windows Forms core chat\\TCPChatClient.cs",
-              "RelativeDocumentMoniker": "Windows Forms core chat\\TCPChatClient.cs",
-              "ToolTip": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\Windows Forms core chat\\TCPChatClient.cs",
-              "RelativeToolTip": "Windows Forms core chat\\TCPChatClient.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAowDgAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-07T02:51:55.538Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "DatabaseAccess.cs",
-              "DocumentMoniker": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\Windows Forms core chat\\DatabaseAccess.cs",
-              "RelativeDocumentMoniker": "Windows Forms core chat\\DatabaseAccess.cs",
-              "ToolTip": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\Windows Forms core chat\\DatabaseAccess.cs",
-              "RelativeToolTip": "Windows Forms core chat\\DatabaseAccess.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAwwDUAAABaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-03T01:54:25.26Z",
+              "WhenOpened": "2026-08-09T01:14:36.483Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "TicTacToe.cs",
-              "DocumentMoniker": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\Windows Forms core chat\\TicTacToe.cs",
-              "RelativeDocumentMoniker": "Windows Forms core chat\\TicTacToe.cs",
-              "ToolTip": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\Windows Forms core chat\\TicTacToe.cs",
-              "RelativeToolTip": "Windows Forms core chat\\TicTacToe.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAAAnAAAAAAAAAA==",
+              "Title": "DatabaseAccess.cs",
+              "DocumentMoniker": "G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\DatabaseAccess.cs",
+              "RelativeDocumentMoniker": "Windows Forms core chat\\DatabaseAccess.cs",
+              "ToolTip": "G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\DatabaseAccess.cs",
+              "RelativeToolTip": "Windows Forms core chat\\DatabaseAccess.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAADgvxUAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-03T02:30:12.478Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Program.cs",
-              "DocumentMoniker": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\Windows Forms core chat\\Program.cs",
-              "RelativeDocumentMoniker": "Windows Forms core chat\\Program.cs",
-              "ToolTip": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\Windows Forms core chat\\Program.cs",
-              "RelativeToolTip": "Windows Forms core chat\\Program.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAAABEAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-03T01:53:44.45Z",
-=======
-              "Title": "TCPChatServer.cs",
-              "DocumentMoniker": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\TCPChatServer.cs",
-              "RelativeDocumentMoniker": "Windows Forms core chat\\TCPChatServer.cs",
-              "ToolTip": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\TCPChatServer.cs",
-              "RelativeToolTip": "Windows Forms core chat\\TCPChatServer.cs",
-              "ViewState": "AgIAALQAAAAAAAAAAAAiwMoAAABWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-30T10:16:03.468Z",
->>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b
+              "WhenOpened": "2026-08-09T01:14:36.489Z",
               "EditorCaption": ""
             }
           ]
