@@ -42,27 +42,41 @@ namespace Windows_Forms_CORE_CHAT_UGH
 
         public static bool DoesUserExist(string username, string password)
         {
-            bool userExists = true;
+            string sqlc = "SELECT 1 FROM [Users] WHERE username = @username AND password = @password";
 
-            // Connect to Database
-            // Use SQL to query if User Table has (username, password)
-            // If it does, return true
+            using (SQLiteConnection cnn = new SQLiteConnection(DATABASE_ADDRESS)) // Connect to Database
+            {
+                // Open the Connection
+                cnn.Open();
+                // Use SQL to query if User Table has (username, password)
+                // Wrap command in a using block to ensure it is properly disposed
+                using (SQLiteCommand sql_queryTable = new SQLiteCommand(sqlc, cnn))
+                {
+                    // Add the parameters
+                    sql_queryTable.Parameters.AddWithValue("@username", username);
+                    sql_queryTable.Parameters.AddWithValue("@password", password);
 
-            return (userExists);
+                    // Execute query and check result
+                    var result = sql_queryTable.ExecuteScalar();
+                    // ExecuteScalar returns null if no rows matched
+                    return result != null;
+                }
+            }
         }
-
-        public static void AddUser(string username, string password, SQLiteConnection cnn)
+        public static void AddUser(string username, string password)
         {
             // Add username and password to database
             // SQL: Populate table
+            using (SQLiteConnection cnn = new SQLiteConnection(DATABASE_ADDRESS)) // Connect to Database
+            {
+                string sql = "INSERT INTO Users (username) VALUES (@_username)";
+                SQLiteCommand sql_insertTable = new SQLiteCommand(sql, cnn);
+                string _username = username;
+                sql_insertTable.Parameters.AddWithValue("@username", _username);
+                sql_insertTable.ExecuteNonQuery();
 
-            string sql = "INSERT INTO Users (username) VALUES (@_username)";
-            SQLiteCommand sql_insertTable = new SQLiteCommand(sql, cnn);
-            string _username = username;
-            sql_insertTable.Parameters.AddWithValue("@username", _username);
-            sql_insertTable.ExecuteNonQuery();
-
-            cnn.Close();
+                cnn.Close();
+            }
         }
 
         public static void RemoveUser(string username)

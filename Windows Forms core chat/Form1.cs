@@ -141,7 +141,14 @@ namespace Windows_Forms_Chat
 
                 // Move this safely INSIDE the try block so it only runs on a valid connection
                 string username = UsernameTextbox.Text;
-                client.SendString("!username " + username); // set username if its available
+                string password = PasswordTextbox.Text;
+                // --- This needs to change to check for subscribed users in the database ---.
+                //client.SendString("!username " + username); // set username if its available
+                // Check if user exists, if not then add the user with credentials.
+                if (DatabaseAccess.DoesUserExist(username, password) == false)
+                {
+                    DatabaseAccess.AddUser(username, password);
+                }
             }
             catch (Exception ex)
             {
