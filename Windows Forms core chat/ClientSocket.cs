@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Net.Sockets;
 using System.Text;
 
@@ -8,7 +9,8 @@ namespace Windows_Forms_Chat
     public class ClientSocket
     {
         //add other attributes to this, e.g username, what state the client is in etc
-        public string username; // stores this clients name.
+        public string username = "none"; // stores this clients name.
+        public string textColor = "Black";
         public bool moderator;
         public bool connectionLost = false;
         public Socket socket;

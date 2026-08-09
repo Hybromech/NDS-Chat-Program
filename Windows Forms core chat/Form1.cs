@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Media;
 using System.Net; 
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Media;
+using Windows_Forms_CORE_CHAT_UGH;
 
 //https://www.youtube.com/watch?v=xgLRe7QV6QI&ab_channel=HazardEditHazardEdit
 namespace Windows_Forms_Chat
@@ -24,21 +26,21 @@ namespace Windows_Forms_Chat
         public Form1()
         {
             InitializeComponent();
-            //# Enable the form to catch key events before controls do
+            // Enable the form to catch key events before controls do
             this.KeyPreview = true;
             // Explicitly link the KeyDown event to the method
             this.KeyDown += new KeyEventHandler(Form1_KeyDown);
         }
 
-        //# Setup Key press enter to send chat
-        //# Silence the default ding sound
+        // Setup Key press enter to send chat
+        // Silence the default ding sound
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             // Bind the key 'enter' to send button
             if (e.KeyCode == Keys.Enter)
             {
                 SendButton.PerformClick();
-                // THIS stops the default beep in KeyDown
+                // stops the default beep in KeyDown
                 e.SuppressKeyPress = true;
                 e.Handled = true; //# Prevents the key from triggering other OS/control events
             }
@@ -47,12 +49,12 @@ namespace Windows_Forms_Chat
         {
             try
             {
-                 // Play a custom .wav file
-                 // make the path relative!.
-                 using (SoundPlayer player = new SoundPlayer("G:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\soundAssets\\message.wav"))
-                 {
-                     player.Play();
-                 }
+                // Play a custom .wav file
+                string path = Path.Combine(AppContext.BaseDirectory, "soundAssets", "message.wav");
+                using (SoundPlayer player = new SoundPlayer(path))
+                {
+                    player.Play();
+                }
             }
             catch (Exception ex)
             {
@@ -82,10 +84,11 @@ namespace Windows_Forms_Chat
 
                     server.SetupServer();
                     this.Text = "Server " + server.port.ToString(); // Modify the form title to Server + port number.
+                    DatabaseAccess.Database_Connect(); // open a database connection and create a Users table if it does not exist.
                 }
                 catch (Exception ex)
                 {
-                    ChatTextBox.Text += "Error: " + ex ;
+                    ChatTextBox.Text += "Error: " + ex;
                     ChatTextBox.AppendText(Environment.NewLine);
                 }
             }
@@ -95,7 +98,7 @@ namespace Windows_Forms_Chat
         private void JoinButton_Click(object sender, EventArgs e)
         {
             if (client != null)
-            { 
+            {
                 if (client.clientSocket.connectionLost == true)
                     client = null;
             }
@@ -103,13 +106,13 @@ namespace Windows_Forms_Chat
             {
                 return;
             }
-           
-            // 1. Validate username FIRST before spinning up network code
-            if (string.IsNullOrEmpty(UsernameTextbox.Text))
+
+            // Validate username FIRST before spinning up network code
+            if (string.IsNullOrEmpty(UsernameTextbox.Text) || string.IsNullOrEmpty(PasswordTextbox.Text))
             {
                 // Guard against client being null if this is the first run
                 if (client != null)
-                    client.AddToChat("Error can't join, Username not specified!");
+                    client.AddToChat("Error can't join, Username or Password not specified!");
                 else
                     ChatTextBox.AppendText("Error can't join, Username not specified!" + Environment.NewLine);
 
@@ -118,9 +121,7 @@ namespace Windows_Forms_Chat
 
             try
             {
-                // 2. Disconnect/Reset any existing singleton instance so a clean one can form
-                // (You may need to add a Reset or Dispose method to your TCPChatClient class)
-                // TCPChatClient.ResetInstance(); 
+                // Disconnect/Reset any existing singleton instance so a clean one can form
 
                 int port = int.Parse(MyPortTextBox.Text);
                 int serverPort = int.Parse(serverPortTextBox.Text);
@@ -130,26 +131,27 @@ namespace Windows_Forms_Chat
                 if (client == null)
                     throw new Exception("Incorrect port value or client instance failed!");
 
-                // 3. Connect and update UI
+                // Connect and update UI
                 client.ConnectToServer();
                 this.Text = "Client " + UsernameTextbox.Text;
 
-                // 4. Move this safely INSIDE the try block so it only runs on a valid connection
+                // Move this safely INSIDE the try block so it only runs on a valid connection
                 string username = UsernameTextbox.Text;
-                client.SendString("!username " + username);
+                client.SendString("!username " + username); // set username if its available
             }
             catch (Exception ex)
             {
                 client = null;
-                // Best practice: Use AppendText so it automatically scrolls to the bottom
+                // Use AppendText so it automatically scrolls to the bottom
                 ChatTextBox.AppendText("Error: " + ex.Message + Environment.NewLine);
             }
         }
 
         private void SendButton_Click(object sender, EventArgs e)
         {
-            if (client != null)
+            if (client != null && client.clientSocket.connectionLost == false)
                 client.SendString(TypeTextBox.Text);
+
             else if (server != null)
                 server.LocalMessage(TypeTextBox.Text);
 
@@ -248,6 +250,16 @@ namespace Windows_Forms_Chat
         private void button9_Click(object sender, EventArgs e)
         {
             AttemptMove(8);
+        }
+
+        private void Disconnect_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

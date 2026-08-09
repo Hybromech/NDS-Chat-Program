@@ -18,7 +18,8 @@ namespace Windows_Forms_Chat
 
         public int serverPort;
         public string serverIP;
-        public Color textColor = Color.Black;
+        public string state = "login";
+        public Color inColor = Color.Black;
 
         public static TCPChatClient CreateInstance(int port, int serverPort, string serverIP, RichTextBox chatTextBox)
         {
@@ -44,15 +45,16 @@ namespace Windows_Forms_Chat
         public void ConnectToServer()
         {
             int attempts = 0;
-
+            
             while (!socket.Connected)
             {
-                try
+                try 
                 {
                     attempts++;
                     SetChat("Connection attempt " + attempts);
                     // Change IPAddress.Loopback to a remote IP to connect to a remote host.
                     socket.Connect(serverIP, serverPort);
+                    state = "chatting";
                 }
                 catch (SocketException)
                 {
@@ -67,10 +69,12 @@ namespace Windows_Forms_Chat
 
         public void SendString(string text)
         {
-            byte[] buffer = Encoding.ASCII.GetBytes(text);
-            socket.Send(buffer, 0, buffer.Length, SocketFlags.None);
+            if (socket != null && socket.IsBound) // can't send if disposed
+            {
+                byte[] buffer = Encoding.ASCII.GetBytes(text);
+                socket.Send(buffer, 0, buffer.Length, SocketFlags.None);
+            }
         }
-
 
         public void ReceiveCallback(IAsyncResult AR) // recieve message from the server
         {
@@ -96,24 +100,65 @@ namespace Windows_Forms_Chat
             string text = Encoding.ASCII.GetString(recBuf);
             Console.WriteLine("Received Text: " + text);
 
-            // reject duplicate username
-            if (text == "That username is taken.")
+            if (text == "!mod")
+            {
+                AddToChat("\"You are promoted to moderator!");
+                currentClientSocket.moderator = true;
+            }
+     
+            if (text == "!kick")  // Kick the user
+            {
+                AddToChat("\"You have been kicked!");
+                clientSocket.connectionLost = true;
+                socket.DisconnectAsync(true); // Disconnect Client side
+                socket.Close();
+                socket.Dispose();
+                return;
+            }
+
+            if (text == "!exit")
+            {
+                AddToChat("\"You have disconnected");
+                clientSocket.connectionLost = true;
+                socket.DisconnectAsync(true); // Disconnect Client side
+                socket.Close();
+                socket.Dispose();
+                return;
+            }
+
+            // reject duplicate username on connect
+            if (text == "connection denied")
             {
                 AddToChat("\"You have been rejected that username is taken!");
                 clientSocket.connectionLost = true;
-                socket.DisconnectAsync(true);
+                socket.DisconnectAsync(true); // Disconnect Client side
                 socket.Close();
+                socket.Dispose();
                 return;
             }
-            // check to see if the client is trying to change text color.
-            if (text.Contains("color"))
+            // reject duplicate username on change, don't disconnect
+            if (text == "change name denied")
             {
-                var targetColor = text.Replace("!color", ""); // remove color substring from the text.
-                textColor = Color.FromName(targetColor); // set this clients color.
+                AddToChat("\"that username is taken!");
+            }
+            // remove color data from text but use it to set inColor
+
+            if (text.Contains("!color"))
+            {
+                int index = text.IndexOf("!color");
+
+                string colInfo = text.Substring(index);
+                var targetColor = colInfo.Replace("!color", ""); // remove color substring from the text.
+
+                inColor = Color.FromName(targetColor); // set the incomming color.
+                text = text.Substring(0, index); // strip color info out of the text.
+            }
+            else {
+                inColor = Color.Black; // Defaults to black.
             }
             //text is from server but could have been broadcast from the other clients
             // add text with users color
-            AddToChat( text, textColor );
+            AddToChat( text, inColor);
             //we just received a message from this socket, better keep an ear out with another thread for the next one
             currentClientSocket.socket.BeginReceive(currentClientSocket.buffer, 0, ClientSocket.BUFFER_SIZE, SocketFlags.None, ReceiveCallback, currentClientSocket);
         }

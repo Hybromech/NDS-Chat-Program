@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Windows_Forms_CORE_CHAT_UGH;
 
 namespace Windows_Forms_Chat
 {
@@ -14,6 +15,7 @@ namespace Windows_Forms_Chat
         [STAThread]
         static void Main()
         {
+            DatabaseAccess.Database_Connect();
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
