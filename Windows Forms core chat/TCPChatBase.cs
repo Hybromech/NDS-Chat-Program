@@ -31,6 +31,7 @@ namespace Windows_Forms_Chat
         }
         public void AddToChat(string str, Color color)
         {
+            // Add chat with color
             ChatTextBox.Invoke((Action)delegate
             {
                 // Move selection cursor to the very end
