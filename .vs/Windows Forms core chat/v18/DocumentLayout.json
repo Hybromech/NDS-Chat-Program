@@ -1,5 +1,6 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "WorkspaceRootPath": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\",
   "Documents": [
     {
@@ -31,10 +32,15 @@
       "RelativeMoniker": "D:0:0:{B8333D53-CBB6-444E-9CE3-19E9F7B85716}|Windows Forms core chat\\Windows Forms core chat.csproj|solutionrelative:windows forms core chat\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
+=======
+  "WorkspaceRootPath": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\",
+  "Documents": [],
+>>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
+<<<<<<< HEAD
       "DocumentGroups": [
         {
           "DockedWidth": 200,
@@ -133,6 +139,9 @@
           ]
         }
       ]
+=======
+      "DocumentGroups": []
+>>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b
     }
   ]
 }

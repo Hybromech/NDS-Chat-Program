@@ -87,11 +87,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\Windows Forms core chat\\Windows Forms core chat.csproj",
       "projectName": "Windows Forms core chat",
       "projectPath": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\Windows Forms core chat\\Windows Forms core chat.csproj",
       "packagesPath": "C:\\Users\\Andy\\.nuget\\packages\\",
       "outputPath": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A3\\NDS-Chat-Program\\Windows Forms core chat\\obj\\",
+=======
+      "projectUniqueName": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\Windows Forms core chat.csproj",
+      "projectName": "Windows Forms core chat",
+      "projectPath": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\Windows Forms core chat.csproj",
+      "packagesPath": "C:\\Users\\Andy\\.nuget\\packages\\",
+      "outputPath": "F:\\Andrew Adata\\Bachelor of Software Engineering\\Networking and Database\\A2\\GitHub\\NDS-Chat-Program\\Windows Forms core chat\\obj\\",
+>>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

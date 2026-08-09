@@ -77,7 +77,11 @@
             // label2
             // 
             label2.AutoSize = true;
+<<<<<<< HEAD
             label2.Location = new System.Drawing.Point(156, 10);
+=======
+            label2.Location = new System.Drawing.Point(190, 9);
+>>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(64, 15);
             label2.TabIndex = 2;
@@ -85,7 +89,11 @@
             // 
             // serverPortTextBox
             // 
+<<<<<<< HEAD
             serverPortTextBox.Location = new System.Drawing.Point(156, 28);
+=======
+            serverPortTextBox.Location = new System.Drawing.Point(190, 27);
+>>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b
             serverPortTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             serverPortTextBox.Name = "serverPortTextBox";
             serverPortTextBox.Size = new System.Drawing.Size(110, 23);
@@ -163,7 +171,11 @@
             // label5
             // 
             label5.AutoSize = true;
+<<<<<<< HEAD
             label5.Location = new System.Drawing.Point(127, 31);
+=======
+            label5.Location = new System.Drawing.Point(143, 27);
+>>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(23, 15);
             label5.TabIndex = 12;
@@ -327,8 +339,11 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.SystemColors.InactiveCaption;
             ClientSize = new System.Drawing.Size(557, 562);
+<<<<<<< HEAD
             Controls.Add(label7);
             Controls.Add(PasswordTextbox);
+=======
+>>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b
             Controls.Add(ChatTextBox);
             Controls.Add(label6);
             Controls.Add(UsernameTextbox);

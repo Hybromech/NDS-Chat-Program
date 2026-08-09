@@ -48,6 +48,7 @@ F:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitH
 F:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\Windows Forms core chat.pdb
 F:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\Windows Forms core chat.genruntimeconfig.cache
 F:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\ref\Windows Forms core chat.dll
+<<<<<<< HEAD
 F:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A3\NDS-Chat-Program\Windows Forms core chat\bin\Debug\net10.0-windows7.0\Windows Forms core chat.exe
 F:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A3\NDS-Chat-Program\Windows Forms core chat\bin\Debug\net10.0-windows7.0\Windows Forms core chat.deps.json
 F:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A3\NDS-Chat-Program\Windows Forms core chat\bin\Debug\net10.0-windows7.0\Windows Forms core chat.runtimeconfig.json
@@ -72,3 +73,5 @@ F:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A3\NDS-
 F:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A3\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\Windows Forms core chat.pdb
 F:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A3\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\Windows Forms core chat.genruntimeconfig.cache
 F:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A3\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\ref\Windows Forms core chat.dll
+=======
+>>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b

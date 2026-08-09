@@ -18,7 +18,10 @@ namespace Windows_Forms_Chat
 
         public int serverPort;
         public string serverIP;
+<<<<<<< HEAD
         public string state = "login";
+=======
+>>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b
         public Color inColor = Color.Black;
 
         public static TCPChatClient CreateInstance(int port, int serverPort, string serverIP, RichTextBox chatTextBox)

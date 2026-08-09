@@ -397,6 +397,7 @@ namespace Windows_Forms_Chat
 
                 // Check if username is available.
 
+<<<<<<< HEAD
                 //bool username_free = true;
                 //foreach (var u in clientSockets)
                 //{
@@ -410,6 +411,17 @@ namespace Windows_Forms_Chat
                 // Check if username has been registered
 
                 bool username_free = true;
+=======
+                bool username_free = true;
+                foreach (var u in clientSockets)
+                {
+                    if (u.username == username)
+                    {
+                        username_free = false;
+                        break;
+                    }
+                }
+>>>>>>> fd3628b4a3d525062e9bb07947c8810325798a2b
 
                 currentClientSocket.username = username;
 
