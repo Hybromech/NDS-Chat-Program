@@ -29,7 +29,7 @@ namespace Windows_Forms_CORE_CHAT_UGH
                     sql_dropTable.ExecuteNonQuery();*/
 
                     //SQL: Create a Table if not exists
-                    string sql1 = "CREATE TABLE if not exists Users (id INTEGER PRIMARY KEY, username, TEXT NOT NULL, password TEXT NOT NULL, wins INT, losses INT, draws INT)";
+                    string sql1 = "CREATE TABLE if not exists Users (id INTEGER PRIMARY KEY, username TEXT NOT NULL, password TEXT, wins INT, losses INT, draws INT)";
                     SQLiteCommand sql_createTable = new SQLiteCommand(sql1, cnn);
                     var rowCount = sql_createTable.ExecuteNonQuery();
                     if (rowCount > 0) // If the row count is zero than the table already exists due to CREATE if not exist
@@ -42,7 +42,7 @@ namespace Windows_Forms_CORE_CHAT_UGH
 
         public static bool DoesUserExist(string username, string password)
         {
-            string sqlc = "SELECT 1 FROM [Users] WHERE username = @username AND password = @password";
+            string sqlc = "SELECT 1 FROM [Users] WHERE username = @username";
 
             using (SQLiteConnection cnn = new SQLiteConnection(DATABASE_ADDRESS)) // Connect to Database
             {
@@ -54,10 +54,10 @@ namespace Windows_Forms_CORE_CHAT_UGH
                 {
                     // Add the parameters
                     sql_queryTable.Parameters.AddWithValue("@username", username);
-                    sql_queryTable.Parameters.AddWithValue("@password", password);
+                    //sql_queryTable.Parameters.AddWithValue("@password", password);
 
                     // Execute query and check result
-                    var result = sql_queryTable.ExecuteScalar();
+                    var result = sql_queryTable.ExecuteScalar(); //!!!
                     // ExecuteScalar returns null if no rows matched
                     return result != null;
                 }
@@ -65,17 +65,23 @@ namespace Windows_Forms_CORE_CHAT_UGH
         }
         public static void AddUser(string username, string password)
         {
-            // Add username and password to database
-            // SQL: Populate table
-            using (SQLiteConnection cnn = new SQLiteConnection(DATABASE_ADDRESS)) // Connect to Database
-            {
-                string sql = "INSERT INTO Users (username) VALUES (@_username)";
-                SQLiteCommand sql_insertTable = new SQLiteCommand(sql, cnn);
-                string _username = username;
-                sql_insertTable.Parameters.AddWithValue("@username", _username);
-                sql_insertTable.ExecuteNonQuery();
+            // 1. Updated SQL statement to include password
+            string sql = "INSERT INTO Users (username, password) VALUES (@username, @password);";
 
-                cnn.Close();
+            using (SQLiteConnection cnn = new SQLiteConnection(DATABASE_ADDRESS))
+            {
+                cnn.Open();
+
+                // 2. Wrapped SQLiteCommand in a using block
+                using (SQLiteCommand sql_insertTable = new SQLiteCommand(sql, cnn))
+                {
+                    // 3. Bind both parameters
+                    sql_insertTable.Parameters.AddWithValue("@username", username);
+                    sql_insertTable.Parameters.AddWithValue("@password", password);
+
+                    sql_insertTable.ExecuteNonQuery();
+                }
+                // Connection and Command automatically close/dispose here
             }
         }
 

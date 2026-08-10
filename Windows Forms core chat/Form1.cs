@@ -111,8 +111,6 @@ namespace Windows_Forms_Chat
             // Validate username FIRST before spinning up network code
 
             if (string.IsNullOrEmpty(UsernameTextbox.Text) || string.IsNullOrEmpty(PasswordTextbox.Text))
-
-            if (string.IsNullOrEmpty(UsernameTextbox.Text))
             {
                 // Guard against client being null if this is the first run
                 if (client != null)
@@ -143,11 +141,18 @@ namespace Windows_Forms_Chat
                 string username = UsernameTextbox.Text;
                 string password = PasswordTextbox.Text;
                 // --- This needs to change to check for subscribed users in the database ---.
-                //client.SendString("!username " + username); // set username if its available
+                
                 // Check if user exists, if not then add the user with credentials.
                 if (DatabaseAccess.DoesUserExist(username, password) == false)
                 {
+                    client.SendString("Adding user " + username);
                     DatabaseAccess.AddUser(username, password);
+                    client.SendString("!username " + username); // set username if its available else disconnect
+                }
+                else {
+                   
+                    client.SendString("Username or password already in use");
+                    client.SendString("!username " + username); // set username if its available else disconnect
                 }
             }
             catch (Exception ex)
