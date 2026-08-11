@@ -20,6 +20,10 @@ namespace Windows_Forms_Chat
         //connected clients
         public List<ClientSocket> clientSockets = new List<ClientSocket>();
 
+        public string player1 = null;
+        public string player2 = null;
+        public string currentTurn = null;
+
         public static TCPChatServer createInstance(int port, RichTextBox chatTextBox)
         {
             TCPChatServer tcp = null;
@@ -100,6 +104,19 @@ namespace Windows_Forms_Chat
                 clientSockets.Remove(currentClientSocket);
                 return;
             }
+            catch (ObjectDisposedException)
+            {
+                return; // Socket was disposed elsewhere
+            }
+
+            // CHECK FOR DISCONNECT / ZERO BYTES
+            if (received == 0)
+            {
+                AddToChat(currentClientSocket.username + " disconnected.");
+                currentClientSocket.socket.Close();
+                clientSockets.Remove(currentClientSocket);
+                return; // Break the recursion
+            }
 
             byte[] recBuf = new byte[received];
             Array.Copy(currentClientSocket.buffer, recBuf, received);
@@ -147,6 +164,9 @@ namespace Windows_Forms_Chat
                         byte[] usernameError = Encoding.ASCII.GetBytes("Please provide a username.");
                         currentClientSocket.socket.Send(usernameError);
                     }
+                    break;
+
+                    case "!join":
                     break;
 
                 case "!username": // This is only hit when user presses join button and sets up the username if possible disconnecting the user otherwise.
@@ -238,6 +258,9 @@ namespace Windows_Forms_Chat
                     {
                         // Reply with error.
                     }
+                    break;
+                case "kill":
+                    DisconnectClient(currentClientSocket);
                     break;
                 default:
                     // normal message broadcast out to all clients, also send color data.
@@ -407,7 +430,7 @@ namespace Windows_Forms_Chat
                 //    }
                 //}
 
-                // Check if username has been registered
+                // Check if username has been registered in this instance
 
                 bool username_free = true;
 
@@ -421,6 +444,7 @@ namespace Windows_Forms_Chat
                 }
 
                 currentClientSocket.username = username;
+                AddToChat("Setting client " + currentClientSocket.username + " to " + username);
 
                 if (username_free)
                 {
@@ -433,9 +457,7 @@ namespace Windows_Forms_Chat
                     // Send error and disconnect the client.
                     byte[] usernameError = Encoding.ASCII.GetBytes("connection denied");
                     currentClientSocket.socket.Send(usernameError);
-                    currentClientSocket.socket.DisconnectAsync(true); // creates stack overflow for some reason!
-                    currentClientSocket.socket.Close();
-                    currentClientSocket.socket.Dispose();
+                    DisconnectClient(currentClientSocket);
                 }
 
             }
@@ -443,6 +465,22 @@ namespace Windows_Forms_Chat
             {
                 byte[] usernameError = Encoding.ASCII.GetBytes("Please provide a username.");
                 currentClientSocket.socket.Send(usernameError);
+            }
+        }
+        public void DisconnectClient(ClientSocket currentClientSocket)
+        {
+            try
+            {
+                if (currentClientSocket.socket.Connected)
+                {
+                    currentClientSocket.socket.Shutdown(SocketShutdown.Both);
+                }
+            }
+            catch (Exception) { /* Handle or log if needed */ }
+            finally
+            {
+                currentClientSocket.socket.Close();
+                clientSockets.Remove(currentClientSocket);
             }
         }
     }

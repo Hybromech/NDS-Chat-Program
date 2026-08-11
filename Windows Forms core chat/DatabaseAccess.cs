@@ -40,6 +40,30 @@ namespace Windows_Forms_CORE_CHAT_UGH
             }
         }
 
+        public static bool Login(string username, string password)
+        {
+            string sqlc = "SELECT 1 FROM [Users] WHERE username = @username AND password = @password LIMIT 1;";
+
+            using (SQLiteConnection cnn = new SQLiteConnection(DATABASE_ADDRESS)) // Connect to Database
+            {
+                // Open the Connection
+                cnn.Open();
+                // Use SQL to query if User Table has (username, password)
+                // Wrap command in a using block to ensure it is properly disposed
+                using (SQLiteCommand sql_queryTable = new SQLiteCommand(sqlc, cnn))
+                {
+                    // Add the parameters
+                    sql_queryTable.Parameters.AddWithValue("@username", username);
+                    sql_queryTable.Parameters.AddWithValue("@password", password);
+
+                    // Execute query and check result
+                    var result = sql_queryTable.ExecuteScalar(); //!!!
+                    // ExecuteScalar returns null if no rows matched
+                    return result != null;
+                }
+            }
+        }
+
         public static bool DoesUserExist(string username, string password)
         {
             string sqlc = "SELECT 1 FROM [Users] WHERE username = @username";

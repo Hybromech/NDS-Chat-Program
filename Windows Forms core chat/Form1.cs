@@ -110,7 +110,7 @@ namespace Windows_Forms_Chat
 
             // Validate username FIRST before spinning up network code
 
-            if (string.IsNullOrEmpty(UsernameTextbox.Text) || string.IsNullOrEmpty(PasswordTextbox.Text))
+            if (string.IsNullOrEmpty(UsernameTextbox.Text) || string.IsNullOrEmpty(PasswordTextbox.Text)) // check if input fields are set.
             {
                 // Guard against client being null if this is the first run
                 if (client != null)
@@ -141,9 +141,15 @@ namespace Windows_Forms_Chat
                 string username = UsernameTextbox.Text;
                 string password = PasswordTextbox.Text;
                 // --- This needs to change to check for subscribed users in the database ---.
-                
+
+                // First check if the user can log in.
+                if (DatabaseAccess.Login(username, password) == true)
+                {
+                    client.SendString("Logging in " + username);
+                    client.SendString("!username " + username); // set username if its available else disconnect      
+                }
                 // Check if user exists, if not then add the user with credentials.
-                if (DatabaseAccess.DoesUserExist(username, password) == false)
+                else if (DatabaseAccess.DoesUserExist(username, password) == false)
                 {
                     client.SendString("Adding user " + username);
                     DatabaseAccess.AddUser(username, password);
@@ -152,7 +158,10 @@ namespace Windows_Forms_Chat
                 else {
                    
                     client.SendString("Username or password already in use");
-                    client.SendString("!username " + username); // set username if its available else disconnect
+                    client.SendString("kill"); // Tell the server to disconnect this client.
+                    client = null;
+                    server = null;
+                    // disconnect the client
                 }
             }
             catch (Exception ex)
