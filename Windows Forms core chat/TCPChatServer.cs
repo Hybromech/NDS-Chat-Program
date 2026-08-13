@@ -6,7 +6,9 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Windows_Forms_CORE_CHAT_UGH;
 using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
@@ -24,7 +26,7 @@ namespace Windows_Forms_Chat
         public string player2 = null;
         public string currentTurn = null;
 
-        public static TCPChatServer createInstance(int port, RichTextBox chatTextBox)
+        public static TCPChatServer createInstance(int port, RichTextBox chatTextBox, TicTacToe ttt)
         {
             TCPChatServer tcp = null;
             //setup if port within range and valid chat box given
@@ -33,7 +35,7 @@ namespace Windows_Forms_Chat
                 tcp = new TCPChatServer();
                 tcp.port = port;
                 tcp.ChatTextBox = chatTextBox;
-
+                tcp.ticTacToe = ttt;
             }
 
             //return empty if user not enter useful details
@@ -81,6 +83,7 @@ namespace Windows_Forms_Chat
             //start a thread to listen out for this new joining socket. Therefore there is a thread open for each client
             joiningSocket.BeginReceive(newClientSocket.buffer, 0, ClientSocket.BUFFER_SIZE, SocketFlags.None, ReceiveCallback, newClientSocket);
             AddToChat("Client connected, waiting for request...");
+            newClientSocket.state = ClientState.CHATTING;
 
             //we finished this accept thread, better kick off another so more people can join
             serverSocket.BeginAccept(AcceptCallback, null);
@@ -166,9 +169,132 @@ namespace Windows_Forms_Chat
                     }
                     break;
 
-                    case "!join":
+                    case "!join": // Join the game.
+                    // is client in chatting state?
+                    if (currentClientSocket.state != ClientState.CHATTING)
+                    {
+                        AddToChat("Current state is " + currentClientSocket.state);
+                        byte[] data9 = Encoding.ASCII.GetBytes("Incorrect Client State");
+                        currentClientSocket.socket.Send(data9);
+                        break;
+                    }
+
+                    // Check if a player position is available?
+                    if (player1 != null && player2 != null)
+                    {
+                        byte[] data10 = Encoding.ASCII.GetBytes("2 players have already joined");
+                        currentClientSocket.socket.Send(data10);
+                        break;
+                    }
+                    else if (player1 == null) 
+                    {
+                        // Join client as player 1
+                        player1 = currentClientSocket.username;
+                        UpdateClientState(currentClientSocket, ClientState.PLAYING);
+                        byte[] data11 = Encoding.ASCII.GetBytes("!player1");
+                        currentClientSocket.socket.Send(data11);
+                    }
+
+                    else if (player2 == null)
+                    {
+                        // Join client as player 1
+                        player2 = currentClientSocket.username;
+                        UpdateClientState(currentClientSocket, ClientState.PLAYING);
+                        byte[] data12 = Encoding.ASCII.GetBytes("!player2");
+                        currentClientSocket.socket.Send(data12);
+                    }
+
+                    // Start the game if we have both players
+                    if (player1 != null && player2 != null)
+                    {
+                        currentTurn = player1;
+                        ClearTicTacToe(currentClientSocket);
+                        Task.Delay(200).ContinueWith(t => SendToAll("GAME START! " + player1 + "(cross) vs. " + player2 + " (naught).", currentClientSocket));
+                        Task.Delay(300).ContinueWith(t => SetPlayerTurn(currentTurn, currentClientSocket));
+                    }
+
                     break;
 
+                case "!scores":
+
+                    // Display sorted scores.
+                    var scores = DatabaseAccess.GetScoreInfo();
+                    // Combine the list into one block of text and send to all
+                    SendToAll(string.Join(Environment.NewLine, scores), null);
+                    break;
+
+                case "!move":
+                    if (param.Length == 2)
+                    {
+                        int tile = int.Parse(param[1]);
+                        TileType type = TileType.blank;
+                        if (currentClientSocket.username.Equals(player1))
+                        {
+                            type = TileType.cross;
+                            AddToChat("Player 1 (cross) attempts move at " + tile + "!");
+                        }
+                        else if (currentClientSocket.username.Equals(player2))
+                        {
+                            type = TileType.naught;
+                            AddToChat("Player 2 (naught) attempts move at " + tile + "!");
+                        }
+                        else
+                        {
+                            // If client attempting move is not a player, abort.
+                            break;
+                        }
+                        bool validmove = ticTacToe.SetTile(tile, type);
+                        if (validmove)
+                        {
+                            // 1. Update the game board.
+                            // 2. Send updated board to all clients.
+                            string gameboard = ticTacToe.GridToString();
+                            SendToAll("!board " + gameboard, currentClientSocket);
+                            // 3. Check if game is over...
+                            GameState gs = ticTacToe.GetGameState();
+                            if (gs == GameState.playing)
+                            {
+                                // 4. If not over, begin next players turn
+                                if (currentTurn.Equals(player1))
+                                {
+                                    currentTurn = player2;
+                                }
+                                else
+                                {
+                                    currentTurn = player1;
+                                }
+                                Task.Delay(100).ContinueWith(t => SetPlayerTurn(currentTurn, currentClientSocket));
+                            }
+                            else
+                            {
+                                if (gs == GameState.crossWins)
+                                {
+                                    Task.Delay(50).ContinueWith(t => SendToAll("GAME END: " + player1 + " (cross) wins!", currentClientSocket));                   
+                                    DatabaseAccess.UserWon(player1);  // Database: cross user won
+                                    DatabaseAccess.UserLost(player2); // Database: naught user lost
+                                }
+                                if (gs == GameState.naughtWins)
+                                {
+                                    Task.Delay(50).ContinueWith(t => SendToAll("GAME END: " + player2 + " (naught) wins!", currentClientSocket));
+                                    DatabaseAccess.UserWon(player2);  // Database: naught user won
+                                    DatabaseAccess.UserLost(player1); // Database: cross user lost
+                                }
+                                if (gs == GameState.draw)
+                                {
+                                    Task.Delay(50).ContinueWith(t => SendToAll("GAME END: Draw!", currentClientSocket));
+                                    // Database: naught user draw
+                                    // Database: cross user draw
+                                    DatabaseAccess.UsersDraw(player1, player2);
+                                }
+
+                                // End the game and return players to chatting state
+                                EndTicTacToe();
+
+                                // TODO: Update Database with scores
+                            }
+                        }
+                    }
+                    break;
                 case "!username": // This is only hit when user presses join button and sets up the username if possible disconnecting the user otherwise.
                     ConnectClient(text, currentClientSocket);
                     break;
@@ -214,7 +340,8 @@ namespace Windows_Forms_Chat
                     }
                     break;
                 case "!commands":
-                    byte[] data = Encoding.ASCII.GetBytes("Commands are !user !mod !mods !kick !exit !who !about !whisper !color");
+                    byte[] data = Encoding.ASCII.GetBytes("Commands are !user !whisper !who !color !mod !mods !kick !about !scores");
+                    
                     currentClientSocket.socket.Send(data);
                     AddToChat("Commands sent to client");
                     break;
@@ -264,7 +391,7 @@ namespace Windows_Forms_Chat
                     break;
                 default:
                     // normal message broadcast out to all clients, also send color data.
-                    SendToAll(currentClientSocket.username + ": " + text + "!color" + currentClientSocket.textColor, currentClientSocket);
+                    SendToAll(currentClientSocket.username + ": " + text + "#color" + currentClientSocket.textColor, currentClientSocket);
                     break;
             }
             //we just received a message from this socket, better keep an ear out with another thread for the next one
@@ -482,6 +609,36 @@ namespace Windows_Forms_Chat
                 currentClientSocket.socket.Close();
                 clientSockets.Remove(currentClientSocket);
             }
+        }
+
+        public void UpdateClientState(ClientSocket client, ClientState state)
+        {
+            client.state = state; // ensure client and server state are matched.
+            byte[] data8 = Encoding.ASCII.GetBytes("!state " + (int)client.state);
+            client.socket.Send(data8);
+        }
+
+        public void ClearTicTacToe(ClientSocket currentClientSocket)
+        {
+            ticTacToe.ResetBoard();
+            Task.Delay(25).ContinueWith(t => SendToAll("!board " + ticTacToe.GridToString(), currentClientSocket));
+        }
+        public void SetPlayerTurn(string username, ClientSocket currentClientSocket)
+        {
+            SendToTarget("!yourturn", username, currentClientSocket);
+        }
+        public void EndTicTacToe()
+        {
+            foreach (ClientSocket c in clientSockets)
+            {
+                if (c.username.Equals(player1) || c.username.Equals(player2))
+                {
+                    UpdateClientState(c, ClientState.CHATTING);
+                }
+            }
+            currentTurn = null;
+            player1 = null;
+            player2 = null;
         }
     }
 }

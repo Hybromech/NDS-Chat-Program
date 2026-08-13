@@ -1,10 +1,12 @@
 ﻿ using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
-using System.Drawing;
+using static System.Windows.Forms.AxHost;
 
 //reference: https://github.com/AbleOpus/NetworkingSamples/blob/master/MultiClient/Program.cs
 namespace Windows_Forms_Chat
@@ -18,11 +20,11 @@ namespace Windows_Forms_Chat
 
         public int serverPort;
         public string serverIP;
-        public string state = "login";
-
+        public ClientState myState = ClientState.LOGIN;
+        
         public Color inColor = Color.Black;
 
-        public static TCPChatClient CreateInstance(int port, int serverPort, string serverIP, RichTextBox chatTextBox)
+        public static TCPChatClient CreateInstance(int port, int serverPort, string serverIP, RichTextBox chatTextBox, TicTacToe ttt)
         {
             TCPChatClient tcp = null;
             //if port values are valid and ip worth attempting to join
@@ -37,6 +39,7 @@ namespace Windows_Forms_Chat
                 tcp.serverIP = serverIP;
                 tcp.ChatTextBox = chatTextBox;
                 tcp.clientSocket.socket = tcp.socket;
+                tcp.ticTacToe = ttt;
 
             }
 
@@ -54,8 +57,9 @@ namespace Windows_Forms_Chat
                     attempts++;
                     SetChat("Connection attempt " + attempts);
                     // Change IPAddress.Loopback to a remote IP to connect to a remote host.
-                    socket.Connect(serverIP, serverPort);
-                    state = "chatting";
+                    myState = ClientState.CHATTING;
+                    clientSocket.state = ClientState.CHATTING;
+                    socket.Connect(serverIP, serverPort);                  
                 }
                 catch (SocketException)
                 {
@@ -101,6 +105,50 @@ namespace Windows_Forms_Chat
             string text = Encoding.ASCII.GetString(recBuf);
             Console.WriteLine("Received Text: " + text);
 
+            string[] param = text.ToLower().Split(' ');
+
+            switch (param[0])
+            {
+                case "!state":
+                    if (param[1].Equals("0"))
+                    {
+                        myState = ClientState.LOGIN;
+                    }
+                    else if (param[1].Equals("1")) {
+                        myState = ClientState.CHATTING;
+                    }
+                    else if (param[1].Equals("2"))
+                    {
+                        myState = ClientState.PLAYING;
+                    }
+                    AddToChat("State Updated to: " + myState.ToString());
+                    break;
+
+                case "!player1":
+                    AddToChat("Joined Tic-Tac-Toe as Player 1 (cross)");
+                    ticTacToe.playerTileType = TileType.cross;
+                    ticTacToe.playerName = "Player1";
+                    break;
+
+                case "!player2":
+                    AddToChat("Joined Tic-Tac-Toe as Player 2 (naught)");
+                    ticTacToe.playerTileType = TileType.naught;
+                    ticTacToe.playerName = "Player2";
+                    break;
+                case "!yourturn":
+                    AddToChat("It is your turn " + ticTacToe.playerName);
+                    ticTacToe.myTurn = true;
+                    break;
+                case "!otherturn":
+                    AddToChat("It is the Opponents turn.");
+                    break;
+                case "!board":
+                    string boardstate = param[1];
+                    AddToChat("Board Update: " + boardstate);
+                    ticTacToe.StringToGrid(boardstate);
+                    break;
+            }
+
             if (text == "!mod")
             {
                 AddToChat("\"You are promoted to moderator!");
@@ -144,17 +192,22 @@ namespace Windows_Forms_Chat
             }
             // remove color data from text but use it to set inColor
 
-            if (text.Contains("!color"))
+            if (text.Contains("#color"))
             {
-                int index = text.IndexOf("!color");
+                int index = text.LastIndexOf("#color");
 
                 string colInfo = text.Substring(index);
-                var targetColor = colInfo.Replace("!color", ""); // remove color substring from the text.
+                var targetColor = colInfo.Replace("#color", "").Trim();
 
-                inColor = Color.FromName(targetColor); // set the incomming color.
-                text = text.Substring(0, index); // strip color info out of the text.
+                // Only set color and strip if a valid color string was appended (e.g. !colorBlack)
+                if (!string.IsNullOrEmpty(targetColor))
+                {
+                    inColor = Color.FromName(targetColor);
+                    text = text.Substring(0, index); // Safely strip trailing color tag
+                }
             }
-            else {
+            else
+            {
                 inColor = Color.Black; // Defaults to black.
             }
             //text is from server but could have been broadcast from the other clients
@@ -162,6 +215,11 @@ namespace Windows_Forms_Chat
             AddToChat( text, inColor);
             //we just received a message from this socket, better keep an ear out with another thread for the next one
             currentClientSocket.socket.BeginReceive(currentClientSocket.buffer, 0, ClientSocket.BUFFER_SIZE, SocketFlags.None, ReceiveCallback, currentClientSocket);
+        }
+
+        public void SendMoveAttemptToServer(int i)
+        {
+            SendString("!move " + i.ToString());
         }
         public void Close()
         {

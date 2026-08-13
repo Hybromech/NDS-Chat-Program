@@ -20,7 +20,7 @@ namespace Windows_Forms_Chat
 {
     public partial class Form1 : Form
     {
-        TicTacToe ticTacToe = new TicTacToe();
+        public TicTacToe ticTacToe = new TicTacToe();
         TCPChatServer server = null;
         TCPChatClient client = null;
 
@@ -78,7 +78,7 @@ namespace Windows_Forms_Chat
                 try
                 {
                     int port = int.Parse(MyPortTextBox.Text);
-                    server = TCPChatServer.createInstance(port, ChatTextBox);
+                    server = TCPChatServer.createInstance(port, ChatTextBox,ticTacToe);
                     //oh no, errors
                     if (server == null)
                         throw new Exception("Incorrect port value!");//thrown exceptions should exit the try and land in next catch
@@ -128,12 +128,13 @@ namespace Windows_Forms_Chat
                 int port = int.Parse(MyPortTextBox.Text);
                 int serverPort = int.Parse(serverPortTextBox.Text);
 
-                client = TCPChatClient.CreateInstance(port, serverPort, ServerIPTextBox.Text, ChatTextBox);
+                client = TCPChatClient.CreateInstance(port, serverPort, ServerIPTextBox.Text, ChatTextBox, ticTacToe);
 
                 if (client == null)
                     throw new Exception("Incorrect port value or client instance failed!");
-      
+
                 // Connect and update UI
+                client.clientSocket.state = ClientState.CHATTING;
                 client.ConnectToServer();
                 this.Text = "Client " + UsernameTextbox.Text;
 
@@ -200,34 +201,39 @@ namespace Windows_Forms_Chat
         }
 
         private void AttemptMove(int i)
-        {
-            if (ticTacToe.myTurn)
+        {                                                       
+            if (client != null)                                                                
             {
-                bool validMove = ticTacToe.SetTile(i, ticTacToe.playerTileType);
-                if (validMove)
-                {
-                    //tell server about it
-                    //ticTacToe.myTurn = false;//call this too when ready with server
-                }
-                //example, do something similar from server
-                GameState gs = ticTacToe.GetGameState();
-                if (gs == GameState.crossWins)
-                {
-                    ChatTextBox.AppendText("X wins!");
-                    ChatTextBox.AppendText(Environment.NewLine);
-                    ticTacToe.ResetBoard();
-                }
-                if (gs == GameState.naughtWins)
-                {
-                    ChatTextBox.AppendText(") wins!");
-                    ChatTextBox.AppendText(Environment.NewLine);
-                    ticTacToe.ResetBoard();
-                }
-                if (gs == GameState.draw)
-                {
-                    ChatTextBox.AppendText("Draw!");
-                    ChatTextBox.AppendText(Environment.NewLine);
-                    ticTacToe.ResetBoard();
+                if (ticTacToe.myTurn)
+                {                                                                                                                                                                                   
+                    client.SendMoveAttemptToServer(i);
+                    ticTacToe.myTurn = false;
+                    //bool validMove = ticTacToe.SetTile(i, ticTacToe.playerTileType);
+                    //if (validMove)
+                    //{
+                    //    //tell server about it
+                    //    //ticTacToe.myTurn = false;//call this too when ready with server
+                    //}
+                    ////example, do something similar from server
+                    //GameState gs = ticTacToe.GetGameState();
+                    //if (gs == GameState.crossWins)
+                    //{
+                    //    ChatTextBox.AppendText("X wins!");
+                    //    ChatTextBox.AppendText(Environment.NewLine);
+                    //    ticTacToe.ResetBoard();
+                    //}
+                    //if (gs == GameState.naughtWins)
+                    //{
+                    //    ChatTextBox.AppendText(") wins!");
+                    //    ChatTextBox.AppendText(Environment.NewLine);
+                    //    ticTacToe.ResetBoard();
+                    //}
+                    //if (gs == GameState.draw)
+                    //{
+                    //    ChatTextBox.AppendText("Draw!");
+                    //    ChatTextBox.AppendText(Environment.NewLine);
+                    //    ticTacToe.ResetBoard();
+                    //}
                 }
             }
         }

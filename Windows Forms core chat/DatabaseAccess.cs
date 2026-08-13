@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SQLite;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SQLite;
-using System.Data;
-using Windows_Forms_Chat;
 using System.Windows.Forms;
-using System.IO;
+using Windows_Forms_Chat;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Windows_Forms_CORE_CHAT_UGH
 {
@@ -123,6 +124,115 @@ namespace Windows_Forms_CORE_CHAT_UGH
         {
             // 1. Open Database
             // 2. Increment Wins of Username
+
+            string sql = "UPDATE Users SET wins = COALESCE(wins, 0) + 1 WHERE username = @username"; // Add 1 to wins if its null then set it to zero.
+
+            using (SQLiteConnection cnn = new SQLiteConnection(DATABASE_ADDRESS))
+            {
+                cnn.Open();
+                
+                // 2. Wrapped SQLiteCommand in a using block
+                using (SQLiteCommand sql_insertTable = new SQLiteCommand(sql, cnn))
+                {
+                    sql_insertTable.Parameters.AddWithValue("@username", username);
+                    sql_insertTable.ExecuteNonQuery();
+                }
+                // Connection and Command automatically close/dispose here
+            }
+
+        }
+        public static void UserLost(string username)
+        {
+            // 1. Open Database
+            // 2. Increment Wins of Username
+
+            string sql = "UPDATE Users SET losses = COALESCE(losses, 0) + 1 WHERE username = @username"; // Add 1 to wins if its null then set it to zero.
+
+            using (SQLiteConnection cnn = new SQLiteConnection(DATABASE_ADDRESS))
+            {
+                cnn.Open();
+
+                // 2. Wrapped SQLiteCommand in a using block
+                using (SQLiteCommand sql_insertTable = new SQLiteCommand(sql, cnn))
+                {
+                    sql_insertTable.Parameters.AddWithValue("@username", username);
+                    sql_insertTable.ExecuteNonQuery();
+                }
+                // Connection and Command automatically close/dispose here
+            }
+
+        }
+        public static void UsersDraw(string username1, string username2)
+        {
+            // 1. Open Database
+            // 2. Increment Draws of Usernames
+
+            string sql = "UPDATE Users SET draws = COALESCE(draws, 0) + 1 WHERE username = @username1 OR username = @username2"; // Add 1 to draws if its null then set it to zero.
+
+            using (SQLiteConnection cnn = new SQLiteConnection(DATABASE_ADDRESS))
+            {
+                cnn.Open();
+
+                // 2. Wrapped SQLiteCommand in a using block
+                using (SQLiteCommand sql_insertTable = new SQLiteCommand(sql, cnn))
+                {
+                    sql_insertTable.Parameters.AddWithValue("@username", username1);
+                    sql_insertTable.Parameters.AddWithValue("@username", username2);
+                    sql_insertTable.ExecuteNonQuery();
+                }
+                // Connection and Command automatically close/dispose here
+            }
+
+        }
+        public static int getEntryLength()
+        {
+            // 1. The SQL query to get the row count
+            string sql = "SELECT COUNT(*) FROM Users;";
+
+            using (SQLiteConnection cnn = new SQLiteConnection(DATABASE_ADDRESS))
+            {
+                cnn.Open();
+
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, cnn))
+                {
+                    // 2. ExecuteScalar returns an 'object', so we cast it to an int
+                    // Convert.ToInt32 handles potential nulls safely
+                    object result = cmd.ExecuteScalar();
+                    return Convert.ToInt32(result);
+                }
+            }
+        }
+        public static List<string> GetScoreInfo()
+        {
+            // Create a list to store the formatted leaderboard lines
+            List<string> scoreboard = new List<string>();
+
+            // SQL query to select username and wins, sorted by wins from highest to lowest
+            string sql = "SELECT username, COALESCE(wins, 0) AS win_count FROM Users ORDER BY win_count DESC;";
+
+            using (SQLiteConnection cnn = new SQLiteConnection(DATABASE_ADDRESS))
+            {
+                cnn.Open();
+
+                using (SQLiteCommand cmd = new SQLiteCommand(sql, cnn))
+                {
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                        // Loop through every row returned by the database
+                        while (reader.Read())
+                        {
+                            string username = reader["username"].ToString();
+                            int wins = Convert.ToInt32(reader["win_count"]);
+
+                            // Format string example: "Tom - 4 wins."
+                            string entry = $"{username} - {wins} wins.";
+                            scoreboard.Add(entry);
+                        }
+                    }
+                }
+            }
+
+            return scoreboard;
         }
     }
 }

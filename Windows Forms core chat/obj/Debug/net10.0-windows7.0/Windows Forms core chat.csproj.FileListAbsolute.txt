@@ -22,3 +22,4 @@ G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitH
 G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\Windows Forms core chat.pdb
 G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\Windows Forms core chat.genruntimeconfig.cache
 G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\ref\Windows Forms core chat.dll
+G:\Andrew Adata\Bachelor of Software Engineering\Networking and Database\A2\GitHub\NDS-Chat-Program\Windows Forms core chat\obj\Debug\net10.0-windows7.0\Windows_Forms_CORE_CHAT_UGH.Properties.Resources.resources

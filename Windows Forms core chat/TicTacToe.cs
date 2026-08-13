@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace Windows_Forms_Chat
 {
@@ -22,17 +23,55 @@ namespace Windows_Forms_Chat
         public TileType playerTileType = TileType.cross;
         public List<Button> buttons = new List<Button>();//assuming 9 in order
         public TileType[] grid = new TileType[9];
+        public string playerName;
 
         public string GridToString()
         {
+            // convert values on board to a string e.g "xox___x_o"
             string s = "";
-            //TODO convert values on board to a string e.g "xox___x_o"
+            for (int i = 0; i < buttons.Count; i++)
+            {
+                switch (buttons[i].Text)
+                {
+                    case "X":
+                        s += 'x';
+                        break;
+                    case "O":
+                        s += 'o';
+                        break;
+                    default:
+                        s += '_';
+                        break;
+                }
+            }
 
             return s;
         }
         public void StringToGrid(string s)
         {
-            //TODO take string s e.g "xox___x_o" and use its values to update grid and the buttons
+            // take string s e.g "xox___x_o" and use its values to update grid and the buttons
+            for (int i = 0; i < grid.Length; i++)
+            {
+                switch (s[i])
+                {
+                    case 'x':
+                        grid[i] = TileType.cross;
+                        break;
+                    case 'o':
+                        grid[i] = TileType.naught;
+                        break;
+                    default:
+                        grid[i] = TileType.blank;
+                        break;
+                }
+                if (buttons.Count >= 9)
+                {
+                    buttons[i].Invoke((Action)delegate // Run the code when the thread is not locked.
+                    {
+                        buttons[i].Text = TileTypeToString(grid[i]);
+                    });
+                }
+            }
         }
 
         public bool SetTile(int index, TileType tileType)
@@ -41,8 +80,13 @@ namespace Windows_Forms_Chat
             {
                 grid[index] = tileType;
                 if (buttons.Count >= 9)
-                    buttons[index].Text = TileTypeToString(tileType);
-                return true;
+                {
+                    buttons[index].Invoke((Action)delegate
+                    {
+                        buttons[index].Text = TileTypeToString(tileType);                    
+                    });// Run the code when the thread is not locked.        
+                    return true;
+                }        
             }
             //else
 
@@ -109,7 +153,10 @@ namespace Windows_Forms_Chat
             {
                 grid[i] = TileType.blank;
                 if (buttons.Count >= 9)
-                    buttons[i].Text = TileTypeToString(TileType.blank);
+                buttons[i].Invoke((Action)delegate
+                {
+                    buttons[i].Text = TileTypeToString(TileType.blank); // Run the code when the thread is not locked.   
+                }); 
             }
         }
 

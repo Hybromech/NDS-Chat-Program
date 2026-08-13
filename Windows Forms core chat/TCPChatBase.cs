@@ -10,6 +10,7 @@ namespace Windows_Forms_Chat
 
     public class TCPChatBase
     {
+        public TicTacToe ticTacToe;
         public RichTextBox ChatTextBox;
         public int port;
         public void SetChat(string str)
