@@ -340,7 +340,7 @@ namespace Windows_Forms_Chat
                     }
                     break;
                 case "!commands":
-                    byte[] data = Encoding.ASCII.GetBytes("Commands are !user !whisper !who !color !mod !mods !kick !about !scores");
+                    byte[] data = Encoding.ASCII.GetBytes("Commands are !user !whisper !who !color !join !mod !mods !kick !about !scores");
                     
                     currentClientSocket.socket.Send(data);
                     AddToChat("Commands sent to client");
@@ -378,8 +378,8 @@ namespace Windows_Forms_Chat
                         string result = string.Join(" ", rightElements);
                         string message = "[Whisper from " + currentClientSocket.username + ']' + " " + result;
 
-                        SendToTarget(message, targetUser, currentClientSocket);
-
+                        SendToTarget(message, targetUser, currentClientSocket); // Send to target user
+                        SendToTarget(message, currentClientSocket.username, currentClientSocket); // Send to the calling user
                     }
                     else
                     {

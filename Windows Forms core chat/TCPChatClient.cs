@@ -98,6 +98,14 @@ namespace Windows_Forms_Chat
                 currentClientSocket.socket.Close();
                 return;
             }
+
+            // GUARD TO STOP INFINITE 0-BYTE RECURSION LOOPS:
+            if (received == 0)
+            {
+                currentClientSocket.socket.Close();
+                return;
+            }
+
             //read bytes from packet
             byte[] recBuf = new byte[received];
             Array.Copy(currentClientSocket.buffer, recBuf, received);

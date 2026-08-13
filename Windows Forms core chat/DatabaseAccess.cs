@@ -40,7 +40,6 @@ namespace Windows_Forms_CORE_CHAT_UGH
                 }
             }
         }
-
         public static bool Login(string username, string password)
         {
             string sqlc = "SELECT 1 FROM [Users] WHERE username = @username AND password = @password LIMIT 1;";
@@ -108,16 +107,6 @@ namespace Windows_Forms_CORE_CHAT_UGH
                 }
                 // Connection and Command automatically close/dispose here
             }
-        }
-
-        public static void RemoveUser(string username)
-        {
-
-        }
-
-        public static void ChangeUsername(string old_username, string new_username)
-        {
-
         }
 
         public static void UserWon(string username)

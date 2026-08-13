@@ -158,7 +158,7 @@ namespace Windows_Forms_Chat
                 }
                 else {
                    
-                    client.SendString("Username or password already in use");
+                    client.SendString("Username or password already in use ");
                     client.SendString("kill"); // Tell the server to disconnect this client.
                     client = null;
                     server = null;
